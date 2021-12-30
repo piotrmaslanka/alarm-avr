@@ -1,0 +1,1380 @@
+
+Alarm.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000072a  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000200  00800060  0000072a  000007be  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000004e  00800260  00800260  000009be  2**0
+                  ALLOC
+  3 .debug_aranges 000000a0  00000000  00000000  000009be  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 00000496  00000000  00000000  00000a5e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000d10  00000000  00000000  00000ef4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000493  00000000  00000000  00001c04  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000080e  00000000  00000000  00002097  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000170  00000000  00000000  000028a8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000002e9  00000000  00000000  00002a18  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000002bb  00000000  00000000  00002d01  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 0d 01 	jmp	0x21a	; 0x21a <__vector_9>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 00 03 	jmp	0x600	; 0x600 <__vector_11>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 88 01 	jmp	0x310	; 0x310 <__vector_13>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	12 e0       	ldi	r17, 0x02	; 2
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ea e2       	ldi	r30, 0x2A	; 42
+  68:	f7 e0       	ldi	r31, 0x07	; 7
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	12 e0       	ldi	r17, 0x02	; 2
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b2 e0       	ldi	r27, 0x02	; 2
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	ae 3a       	cpi	r26, 0xAE	; 174
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 cd 00 	call	0x19a	; 0x19a <main>
+  8a:	0c 94 93 03 	jmp	0x726	; 0x726 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <rearm>:
+
+unsigned char bAlarmMask, bAlarmEnabled, bSiren, bDebugStatus = 0, bPresenceSuspend = 0;
+
+void rearm(unsigned char newMask)
+{
+	bAlarmEnabled = 0;
+  92:	10 92 9d 02 	sts	0x029D, r1
+	bAlarmMask = (newMask | VB_UNARMED) & VB_ARMED;
+  96:	8e 77       	andi	r24, 0x7E	; 126
+  98:	81 60       	ori	r24, 0x01	; 1
+  9a:	80 93 64 02 	sts	0x0264, r24
+}
+  9e:	08 95       	ret
+
+000000a0 <loop>:
+	sei();
+}
+
+
+void loop()
+{
+  a0:	1f 93       	push	r17
+  a2:	10 e0       	ldi	r17, 0x00	; 0
+  a4:	20 e0       	ldi	r18, 0x00	; 0
+  a6:	30 e0       	ldi	r19, 0x00	; 0
+	unsigned char presence = 0;		// --------------- do presence
+	for(int i=0; i<7; i++) 
+		if (baTrigger[i] >= SIGNAL_LENGTH) presence |= 1 << i;
+  a8:	41 e0       	ldi	r20, 0x01	; 1
+  aa:	50 e0       	ldi	r21, 0x00	; 0
+  ac:	f9 01       	movw	r30, r18
+  ae:	e0 56       	subi	r30, 0x60	; 96
+  b0:	fd 4f       	sbci	r31, 0xFD	; 253
+  b2:	80 81       	ld	r24, Z
+  b4:	84 30       	cpi	r24, 0x04	; 4
+  b6:	40 f0       	brcs	.+16     	; 0xc8 <loop+0x28>
+  b8:	ca 01       	movw	r24, r20
+  ba:	02 2e       	mov	r0, r18
+  bc:	02 c0       	rjmp	.+4      	; 0xc2 <loop+0x22>
+  be:	88 0f       	add	r24, r24
+  c0:	99 1f       	adc	r25, r25
+  c2:	0a 94       	dec	r0
+  c4:	e2 f7       	brpl	.-8      	; 0xbe <loop+0x1e>
+  c6:	18 2b       	or	r17, r24
+
+
+void loop()
+{
+	unsigned char presence = 0;		// --------------- do presence
+	for(int i=0; i<7; i++) 
+  c8:	2f 5f       	subi	r18, 0xFF	; 255
+  ca:	3f 4f       	sbci	r19, 0xFF	; 255
+  cc:	27 30       	cpi	r18, 0x07	; 7
+  ce:	31 05       	cpc	r19, r1
+  d0:	69 f7       	brne	.-38     	; 0xac <loop+0xc>
+		if (baTrigger[i] >= SIGNAL_LENGTH) presence |= 1 << i;
+
+
+	if ((presence & bAlarmMask) > 0)		// -------------- check alarm
+  d2:	20 91 64 02 	lds	r18, 0x0264
+  d6:	81 2f       	mov	r24, r17
+  d8:	82 23       	and	r24, r18
+  da:	49 f0       	breq	.+18     	; 0xee <loop+0x4e>
+	{
+		cli(); iTimer = 0; sei();
+  dc:	f8 94       	cli
+  de:	10 92 9f 02 	sts	0x029F, r1
+  e2:	10 92 9e 02 	sts	0x029E, r1
+  e6:	78 94       	sei
+		bAlarmEnabled = 1;
+  e8:	81 e0       	ldi	r24, 0x01	; 1
+  ea:	80 93 9d 02 	sts	0x029D, r24
+	}
+								// -------------------- alarm disabler
+	if ((bAlarmEnabled == 1) && (iTimer > ALARM_LENGTH)) bAlarmEnabled = 0;
+  ee:	80 91 9d 02 	lds	r24, 0x029D
+  f2:	81 30       	cpi	r24, 0x01	; 1
+  f4:	49 f4       	brne	.+18     	; 0x108 <loop+0x68>
+  f6:	80 91 9e 02 	lds	r24, 0x029E
+  fa:	90 91 9f 02 	lds	r25, 0x029F
+  fe:	8d 5e       	subi	r24, 0xED	; 237
+ 100:	94 40       	sbci	r25, 0x04	; 4
+ 102:	10 f0       	brcs	.+4      	; 0x108 <loop+0x68>
+ 104:	10 92 9d 02 	sts	0x029D, r1
+
+								// -------------- arm-via-casette
+	if (baTrigger[7] == SIGNAL_LENGTH)
+ 108:	80 91 a7 02 	lds	r24, 0x02A7
+ 10c:	84 30       	cpi	r24, 0x04	; 4
+ 10e:	81 f4       	brne	.+32     	; 0x130 <loop+0x90>
+	{
+		cli(); baTrigger[7]++; sei();
+ 110:	f8 94       	cli
+ 112:	85 e0       	ldi	r24, 0x05	; 5
+ 114:	80 93 a7 02 	sts	0x02A7, r24
+ 118:	78 94       	sei
+
+		if (bAlarmMask == VB_UNARMED) rearm(VB_ARMED);
+ 11a:	21 30       	cpi	r18, 0x01	; 1
+ 11c:	21 f4       	brne	.+8      	; 0x126 <loop+0x86>
+
+unsigned char bAlarmMask, bAlarmEnabled, bSiren, bDebugStatus = 0, bPresenceSuspend = 0;
+
+void rearm(unsigned char newMask)
+{
+	bAlarmEnabled = 0;
+ 11e:	10 92 9d 02 	sts	0x029D, r1
+	bAlarmMask = (newMask | VB_UNARMED) & VB_ARMED;
+ 122:	8f e7       	ldi	r24, 0x7F	; 127
+ 124:	03 c0       	rjmp	.+6      	; 0x12c <loop+0x8c>
+
+unsigned char bAlarmMask, bAlarmEnabled, bSiren, bDebugStatus = 0, bPresenceSuspend = 0;
+
+void rearm(unsigned char newMask)
+{
+	bAlarmEnabled = 0;
+ 126:	10 92 9d 02 	sts	0x029D, r1
+	bAlarmMask = (newMask | VB_UNARMED) & VB_ARMED;
+ 12a:	81 e0       	ldi	r24, 0x01	; 1
+ 12c:	80 93 64 02 	sts	0x0264, r24
+
+		if (bAlarmMask == VB_UNARMED) rearm(VB_ARMED);
+		else rearm(VB_UNARMED);
+	}
+								// -------------- arm led blinker
+	if (bAlarmMask == VB_ARMED)
+ 130:	80 91 64 02 	lds	r24, 0x0264
+ 134:	8f 37       	cpi	r24, 0x7F	; 127
+ 136:	31 f0       	breq	.+12     	; 0x144 <loop+0xa4>
+	{
+		pins_out(PINS_ARMLED, 1);
+	}
+	else if (bAlarmMask == VB_UNARMED)
+ 138:	81 30       	cpi	r24, 0x01	; 1
+ 13a:	39 f0       	breq	.+14     	; 0x14a <loop+0xaa>
+	{
+		pins_out(PINS_ARMLED, 0);
+	}
+	else
+	{
+		if ((iTimer & 16) == 16) pins_out(PINS_ARMLED, 1);
+ 13c:	80 91 9e 02 	lds	r24, 0x029E
+ 140:	84 ff       	sbrs	r24, 4
+ 142:	03 c0       	rjmp	.+6      	; 0x14a <loop+0xaa>
+ 144:	82 e0       	ldi	r24, 0x02	; 2
+ 146:	61 e0       	ldi	r22, 0x01	; 1
+ 148:	02 c0       	rjmp	.+4      	; 0x14e <loop+0xae>
+		else pins_out(PINS_ARMLED, 0);
+ 14a:	82 e0       	ldi	r24, 0x02	; 2
+ 14c:	60 e0       	ldi	r22, 0x00	; 0
+ 14e:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <pins_out>
+								// ---------------------- siren
+	uint8_t siren_temp = 0;
+
+	siren_temp |= bSiren;
+	siren_temp |= bAlarmEnabled;
+	pins_out(PINS_SIREN, siren_temp);
+ 152:	60 91 9d 02 	lds	r22, 0x029D
+ 156:	80 91 98 02 	lds	r24, 0x0298
+ 15a:	68 2b       	or	r22, r24
+ 15c:	81 e0       	ldi	r24, 0x01	; 1
+ 15e:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <pins_out>
+								// ---------------------- suspend stopper
+	bPresenceSuspend |= presence;
+ 162:	80 91 61 02 	lds	r24, 0x0261
+ 166:	81 2b       	or	r24, r17
+ 168:	80 93 61 02 	sts	0x0261, r24
+
+	wdt_reset();
+ 16c:	a8 95       	wdr
+}
+ 16e:	1f 91       	pop	r17
+ 170:	08 95       	ret
+
+00000172 <boot>:
+
+unsigned char bAlarmMask, bAlarmEnabled, bSiren, bDebugStatus = 0, bPresenceSuspend = 0;
+
+void rearm(unsigned char newMask)
+{
+	bAlarmEnabled = 0;
+ 172:	10 92 9d 02 	sts	0x029D, r1
+	bAlarmMask = (newMask | VB_UNARMED) & VB_ARMED;
+ 176:	81 e0       	ldi	r24, 0x01	; 1
+ 178:	80 93 64 02 	sts	0x0264, r24
+}
+
+void boot()
+{
+	rearm(VB_UNARMED);
+	pins_init();
+ 17c:	0e 94 f2 00 	call	0x1e4	; 0x1e4 <pins_init>
+	uart_init();
+ 180:	0e 94 b2 01 	call	0x364	; 0x364 <uart_init>
+	wdt_enable(WDTO_60MS);
+ 184:	2a e0       	ldi	r18, 0x0A	; 10
+ 186:	88 e1       	ldi	r24, 0x18	; 24
+ 188:	90 e0       	ldi	r25, 0x00	; 0
+ 18a:	0f b6       	in	r0, 0x3f	; 63
+ 18c:	f8 94       	cli
+ 18e:	a8 95       	wdr
+ 190:	81 bd       	out	0x21, r24	; 33
+ 192:	0f be       	out	0x3f, r0	; 63
+ 194:	21 bd       	out	0x21, r18	; 33
+	sei();
+ 196:	78 94       	sei
+}
+ 198:	08 95       	ret
+
+0000019a <main>:
+}
+
+
+int main()
+{
+	boot();
+ 19a:	0e 94 b9 00 	call	0x172	; 0x172 <boot>
+	for (;;) loop();
+ 19e:	0e 94 50 00 	call	0xa0	; 0xa0 <loop>
+ 1a2:	fd cf       	rjmp	.-6      	; 0x19e <main+0x4>
+
+000001a4 <pins_collect>:
+uint8_t baTrigger[8];
+
+uint8_t pins_collect()
+{
+	uint8_t c, d;
+	c = PINC;
+ 1a4:	93 b3       	in	r25, 0x13	; 19
+	d = PIND;
+ 1a6:	80 b3       	in	r24, 0x10	; 16
+ 1a8:	82 95       	swap	r24
+ 1aa:	86 95       	lsr	r24
+ 1ac:	86 95       	lsr	r24
+ 1ae:	83 70       	andi	r24, 0x03	; 3
+ 1b0:	9c 7f       	andi	r25, 0xFC	; 252
+ 1b2:	89 0f       	add	r24, r25
+	return (((c & 0xFC) + (d >> 6)) ^ 128);
+}
+ 1b4:	80 58       	subi	r24, 0x80	; 128
+ 1b6:	08 95       	ret
+
+000001b8 <pins_out>:
+			uart_switch_receive();
+}
+
+void pins_out(uint8_t what, uint8_t status)
+{
+	status = 1 - status;		// remember - outputs are negated
+ 1b8:	91 e0       	ldi	r25, 0x01	; 1
+ 1ba:	96 1b       	sub	r25, r22
+								// by output board design
+	if (what == PINS_SIREN)
+ 1bc:	81 30       	cpi	r24, 0x01	; 1
+ 1be:	41 f4       	brne	.+16     	; 0x1d0 <pins_out+0x18>
+	{
+		if (status == 0) 	  PORTD &= ~8;
+ 1c0:	99 23       	and	r25, r25
+ 1c2:	11 f4       	brne	.+4      	; 0x1c8 <pins_out+0x10>
+ 1c4:	93 98       	cbi	0x12, 3	; 18
+ 1c6:	08 95       	ret
+		else if (status == 1) PORTD |= 8;
+ 1c8:	91 30       	cpi	r25, 0x01	; 1
+ 1ca:	59 f4       	brne	.+22     	; 0x1e2 <pins_out+0x2a>
+ 1cc:	93 9a       	sbi	0x12, 3	; 18
+ 1ce:	08 95       	ret
+	}
+	else if (what == PINS_ARMLED)
+ 1d0:	82 30       	cpi	r24, 0x02	; 2
+ 1d2:	39 f4       	brne	.+14     	; 0x1e2 <pins_out+0x2a>
+	{
+		if (status == 0) 	  PORTD &= ~4;
+ 1d4:	99 23       	and	r25, r25
+ 1d6:	11 f4       	brne	.+4      	; 0x1dc <pins_out+0x24>
+ 1d8:	92 98       	cbi	0x12, 2	; 18
+ 1da:	08 95       	ret
+		else if (status == 1) PORTD |= 4;
+ 1dc:	91 30       	cpi	r25, 0x01	; 1
+ 1de:	09 f4       	brne	.+2      	; 0x1e2 <pins_out+0x2a>
+ 1e0:	92 9a       	sbi	0x12, 2	; 18
+ 1e2:	08 95       	ret
+
+000001e4 <pins_init>:
+	}
+}
+
+void pins_init()
+{
+	DDRA = 0xFF;
+ 1e4:	8f ef       	ldi	r24, 0xFF	; 255
+ 1e6:	8a bb       	out	0x1a, r24	; 26
+	DDRB = 0xFF;		// PORTA, PORTB unused - outputs
+ 1e8:	87 bb       	out	0x17, r24	; 23
+	DDRC = 0x03;
+ 1ea:	83 e0       	ldi	r24, 0x03	; 3
+ 1ec:	84 bb       	out	0x14, r24	; 20
+	DDRD = 0x3C;
+ 1ee:	8c e3       	ldi	r24, 0x3C	; 60
+ 1f0:	81 bb       	out	0x11, r24	; 17
+	pins_out(PINS_SIREN, 0);
+ 1f2:	81 e0       	ldi	r24, 0x01	; 1
+ 1f4:	60 e0       	ldi	r22, 0x00	; 0
+ 1f6:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <pins_out>
+	pins_out(PINS_ARMLED, 0);
+ 1fa:	82 e0       	ldi	r24, 0x02	; 2
+ 1fc:	60 e0       	ldi	r22, 0x00	; 0
+ 1fe:	0e 94 dc 00 	call	0x1b8	; 0x1b8 <pins_out>
+
+	TCCR0 = (1<<CS02)|(0<<CS01)|(1<<CS00);		// equals to 0x05
+ 202:	85 e0       	ldi	r24, 0x05	; 5
+ 204:	83 bf       	out	0x33, r24	; 51
+	TIMSK = (1 << TOIE0);						// equals to 0x01
+ 206:	81 e0       	ldi	r24, 0x01	; 1
+ 208:	89 bf       	out	0x39, r24	; 57
+ 20a:	e0 ea       	ldi	r30, 0xA0	; 160
+ 20c:	f2 e0       	ldi	r31, 0x02	; 2
+
+	for(uint8_t i=0; i<8; i++) baTrigger[i] = 0;
+ 20e:	11 92       	st	Z+, r1
+ 210:	82 e0       	ldi	r24, 0x02	; 2
+ 212:	e8 3a       	cpi	r30, 0xA8	; 168
+ 214:	f8 07       	cpc	r31, r24
+ 216:	d9 f7       	brne	.-10     	; 0x20e <pins_init+0x2a>
+}
+ 218:	08 95       	ret
+
+0000021a <__vector_9>:
+	d = PIND;
+	return (((c & 0xFC) + (d >> 6)) ^ 128);
+}
+
+SIGNAL (SIG_OVERFLOW0)
+{
+ 21a:	1f 92       	push	r1
+ 21c:	0f 92       	push	r0
+ 21e:	0f b6       	in	r0, 0x3f	; 63
+ 220:	0f 92       	push	r0
+ 222:	11 24       	eor	r1, r1
+ 224:	2f 93       	push	r18
+ 226:	3f 93       	push	r19
+ 228:	4f 93       	push	r20
+ 22a:	5f 93       	push	r21
+ 22c:	6f 93       	push	r22
+ 22e:	7f 93       	push	r23
+ 230:	8f 93       	push	r24
+ 232:	9f 93       	push	r25
+ 234:	af 93       	push	r26
+ 236:	bf 93       	push	r27
+ 238:	ef 93       	push	r30
+ 23a:	ff 93       	push	r31
+	iTimer++;
+ 23c:	40 91 9e 02 	lds	r20, 0x029E
+ 240:	50 91 9f 02 	lds	r21, 0x029F
+ 244:	4f 5f       	subi	r20, 0xFF	; 255
+ 246:	5f 4f       	sbci	r21, 0xFF	; 255
+ 248:	50 93 9f 02 	sts	0x029F, r21
+ 24c:	40 93 9e 02 	sts	0x029E, r20
+uint8_t baTrigger[8];
+
+uint8_t pins_collect()
+{
+	uint8_t c, d;
+	c = PINC;
+ 250:	93 b3       	in	r25, 0x13	; 19
+	d = PIND;
+ 252:	80 b3       	in	r24, 0x10	; 16
+	return (((c & 0xFC) + (d >> 6)) ^ 128);
+ 254:	82 95       	swap	r24
+ 256:	86 95       	lsr	r24
+ 258:	86 95       	lsr	r24
+ 25a:	83 70       	andi	r24, 0x03	; 3
+ 25c:	9c 7f       	andi	r25, 0xFC	; 252
+ 25e:	89 0f       	add	r24, r25
+ 260:	80 58       	subi	r24, 0x80	; 128
+ 262:	e0 ea       	ldi	r30, 0xA0	; 160
+ 264:	f2 e0       	ldi	r31, 0x02	; 2
+ 266:	20 e0       	ldi	r18, 0x00	; 0
+ 268:	30 e0       	ldi	r19, 0x00	; 0
+	iTimer++;
+	uint8_t pins;
+	pins = pins_collect();
+
+	for (uint8_t i = 0; i < 8; i++)
+		if (((1 << i) & pins) > 0) baTrigger[i] = baTrigger[i] + 1;
+ 26a:	a1 e0       	ldi	r26, 0x01	; 1
+ 26c:	b0 e0       	ldi	r27, 0x00	; 0
+ 26e:	68 2f       	mov	r22, r24
+ 270:	70 e0       	ldi	r23, 0x00	; 0
+ 272:	cd 01       	movw	r24, r26
+ 274:	02 2e       	mov	r0, r18
+ 276:	02 c0       	rjmp	.+4      	; 0x27c <__vector_9+0x62>
+ 278:	88 0f       	add	r24, r24
+ 27a:	99 1f       	adc	r25, r25
+ 27c:	0a 94       	dec	r0
+ 27e:	e2 f7       	brpl	.-8      	; 0x278 <__vector_9+0x5e>
+ 280:	86 23       	and	r24, r22
+ 282:	97 23       	and	r25, r23
+ 284:	18 16       	cp	r1, r24
+ 286:	19 06       	cpc	r1, r25
+ 288:	24 f4       	brge	.+8      	; 0x292 <__vector_9+0x78>
+ 28a:	80 81       	ld	r24, Z
+ 28c:	8f 5f       	subi	r24, 0xFF	; 255
+ 28e:	80 83       	st	Z, r24
+ 290:	01 c0       	rjmp	.+2      	; 0x294 <__vector_9+0x7a>
+		else baTrigger[i] = 0;
+ 292:	10 82       	st	Z, r1
+ 294:	2f 5f       	subi	r18, 0xFF	; 255
+ 296:	3f 4f       	sbci	r19, 0xFF	; 255
+ 298:	31 96       	adiw	r30, 0x01	; 1
+{
+	iTimer++;
+	uint8_t pins;
+	pins = pins_collect();
+
+	for (uint8_t i = 0; i < 8; i++)
+ 29a:	28 30       	cpi	r18, 0x08	; 8
+ 29c:	31 05       	cpc	r19, r1
+ 29e:	49 f7       	brne	.-46     	; 0x272 <__vector_9+0x58>
+		if (((1 << i) & pins) > 0) baTrigger[i] = baTrigger[i] + 1;
+		else baTrigger[i] = 0;
+
+	if (bStatus == UART_TRANSMITTING) // prevent from hanging up on transmission
+ 2a0:	80 91 65 02 	lds	r24, 0x0265
+ 2a4:	88 23       	and	r24, r24
+ 2a6:	59 f4       	brne	.+22     	; 0x2be <__vector_9+0xa4>
+		if ((iTimer - iTransmissionTimer) > 2) 
+ 2a8:	80 91 9a 02 	lds	r24, 0x029A
+ 2ac:	90 91 9b 02 	lds	r25, 0x029B
+ 2b0:	48 1b       	sub	r20, r24
+ 2b2:	59 0b       	sbc	r21, r25
+ 2b4:	43 30       	cpi	r20, 0x03	; 3
+ 2b6:	51 05       	cpc	r21, r1
+ 2b8:	10 f0       	brcs	.+4      	; 0x2be <__vector_9+0xa4>
+			uart_switch_receive();
+ 2ba:	0e 94 70 01 	call	0x2e0	; 0x2e0 <uart_switch_receive>
+}
+ 2be:	ff 91       	pop	r31
+ 2c0:	ef 91       	pop	r30
+ 2c2:	bf 91       	pop	r27
+ 2c4:	af 91       	pop	r26
+ 2c6:	9f 91       	pop	r25
+ 2c8:	8f 91       	pop	r24
+ 2ca:	7f 91       	pop	r23
+ 2cc:	6f 91       	pop	r22
+ 2ce:	5f 91       	pop	r21
+ 2d0:	4f 91       	pop	r20
+ 2d2:	3f 91       	pop	r19
+ 2d4:	2f 91       	pop	r18
+ 2d6:	0f 90       	pop	r0
+ 2d8:	0f be       	out	0x3f, r0	; 63
+ 2da:	0f 90       	pop	r0
+ 2dc:	1f 90       	pop	r1
+ 2de:	18 95       	reti
+
+000002e0 <uart_switch_receive>:
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+
+void uart_switch_receive() { PORTD &= ~16; bStatus = UART_RECEIVING; }
+ 2e0:	94 98       	cbi	0x12, 4	; 18
+ 2e2:	81 e0       	ldi	r24, 0x01	; 1
+ 2e4:	80 93 65 02 	sts	0x0265, r24
+ 2e8:	08 95       	ret
+
+000002ea <uart_send>:
+inline void uart_switch_transmit() { PORTD |= 16; bStatus = UART_TRANSMITTING; iTransmissionTimer = iTimer; }
+
+unsigned char uart_send()
+{
+	if (buffer_pointer == buffer_length) return 0;
+ 2ea:	90 91 ab 02 	lds	r25, 0x02AB
+ 2ee:	80 91 63 02 	lds	r24, 0x0263
+ 2f2:	98 17       	cp	r25, r24
+ 2f4:	11 f4       	brne	.+4      	; 0x2fa <uart_send+0x10>
+ 2f6:	80 e0       	ldi	r24, 0x00	; 0
+ 2f8:	08 95       	ret
+	UDR = buffer[buffer_pointer];
+ 2fa:	e9 2f       	mov	r30, r25
+ 2fc:	f0 e0       	ldi	r31, 0x00	; 0
+ 2fe:	ea 59       	subi	r30, 0x9A	; 154
+ 300:	fd 4f       	sbci	r31, 0xFD	; 253
+ 302:	80 81       	ld	r24, Z
+ 304:	8c b9       	out	0x0c, r24	; 12
+	buffer_pointer++;
+ 306:	9f 5f       	subi	r25, 0xFF	; 255
+ 308:	90 93 ab 02 	sts	0x02AB, r25
+ 30c:	81 e0       	ldi	r24, 0x01	; 1
+	return 1;
+}
+ 30e:	08 95       	ret
+
+00000310 <__vector_13>:
+
+SIGNAL (SIG_USART_TRANS)
+{
+ 310:	1f 92       	push	r1
+ 312:	0f 92       	push	r0
+ 314:	0f b6       	in	r0, 0x3f	; 63
+ 316:	0f 92       	push	r0
+ 318:	11 24       	eor	r1, r1
+ 31a:	8f 93       	push	r24
+ 31c:	9f 93       	push	r25
+ 31e:	ef 93       	push	r30
+ 320:	ff 93       	push	r31
+	if (bStatus == UART_RECEIVING) return;
+ 322:	80 91 65 02 	lds	r24, 0x0265
+ 326:	81 30       	cpi	r24, 0x01	; 1
+ 328:	a1 f0       	breq	.+40     	; 0x352 <__vector_13+0x42>
+void uart_switch_receive() { PORTD &= ~16; bStatus = UART_RECEIVING; }
+inline void uart_switch_transmit() { PORTD |= 16; bStatus = UART_TRANSMITTING; iTransmissionTimer = iTimer; }
+
+unsigned char uart_send()
+{
+	if (buffer_pointer == buffer_length) return 0;
+ 32a:	90 91 ab 02 	lds	r25, 0x02AB
+ 32e:	80 91 63 02 	lds	r24, 0x0263
+ 332:	98 17       	cp	r25, r24
+ 334:	51 f0       	breq	.+20     	; 0x34a <__vector_13+0x3a>
+	UDR = buffer[buffer_pointer];
+ 336:	e9 2f       	mov	r30, r25
+ 338:	f0 e0       	ldi	r31, 0x00	; 0
+ 33a:	ea 59       	subi	r30, 0x9A	; 154
+ 33c:	fd 4f       	sbci	r31, 0xFD	; 253
+ 33e:	80 81       	ld	r24, Z
+ 340:	8c b9       	out	0x0c, r24	; 12
+	buffer_pointer++;
+ 342:	9f 5f       	subi	r25, 0xFF	; 255
+ 344:	90 93 ab 02 	sts	0x02AB, r25
+ 348:	04 c0       	rjmp	.+8      	; 0x352 <__vector_13+0x42>
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+
+void uart_switch_receive() { PORTD &= ~16; bStatus = UART_RECEIVING; }
+ 34a:	94 98       	cbi	0x12, 4	; 18
+ 34c:	81 e0       	ldi	r24, 0x01	; 1
+ 34e:	80 93 65 02 	sts	0x0265, r24
+
+SIGNAL (SIG_USART_TRANS)
+{
+	if (bStatus == UART_RECEIVING) return;
+	if (uart_send() == 0) uart_switch_receive();
+}
+ 352:	ff 91       	pop	r31
+ 354:	ef 91       	pop	r30
+ 356:	9f 91       	pop	r25
+ 358:	8f 91       	pop	r24
+ 35a:	0f 90       	pop	r0
+ 35c:	0f be       	out	0x3f, r0	; 63
+ 35e:	0f 90       	pop	r0
+ 360:	1f 90       	pop	r1
+ 362:	18 95       	reti
+
+00000364 <uart_init>:
+	analyze(data);
+}
+
+void uart_init()
+{
+	bScanStatus = SS_ADDRESS;
+ 364:	91 e0       	ldi	r25, 0x01	; 1
+ 366:	90 93 a8 02 	sts	0x02A8, r25
+	UBRRH = 0;
+ 36a:	10 bc       	out	0x20, r1	; 32
+	UBRRL = 11;
+ 36c:	8b e0       	ldi	r24, 0x0B	; 11
+ 36e:	89 b9       	out	0x09, r24	; 9
+	UCSRC = (1<<URSEL)|(3<<UCSZ0);
+ 370:	86 e8       	ldi	r24, 0x86	; 134
+ 372:	80 bd       	out	0x20, r24	; 32
+	UCSRB |= (1<<TXCIE)|(1<<RXCIE)|(1<<RXEN)|(1<<TXEN);
+ 374:	8a b1       	in	r24, 0x0a	; 10
+ 376:	88 6d       	ori	r24, 0xD8	; 216
+ 378:	8a b9       	out	0x0a, r24	; 10
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+
+void uart_switch_receive() { PORTD &= ~16; bStatus = UART_RECEIVING; }
+ 37a:	94 98       	cbi	0x12, 4	; 18
+ 37c:	90 93 65 02 	sts	0x0265, r25
+	UBRRL = 11;
+	UCSRC = (1<<URSEL)|(3<<UCSZ0);
+	UCSRB |= (1<<TXCIE)|(1<<RXCIE)|(1<<RXEN)|(1<<TXEN);
+	
+	uart_switch_receive();
+}
+ 380:	08 95       	ret
+
+00000382 <uart_process_input>:
+	bScanStatus = SS_ADDRESS;
+	analyze(data);
+}
+
+void uart_process_input()
+{
+ 382:	cf 93       	push	r28
+ 384:	df 93       	push	r29
+	if (mbCommand == MC_READ)
+ 386:	20 91 aa 02 	lds	r18, 0x02AA
+ 38a:	23 30       	cpi	r18, 0x03	; 3
+ 38c:	c1 f5       	brne	.+112    	; 0x3fe <uart_process_input+0x7c>
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 38e:	8a e0       	ldi	r24, 0x0A	; 10
+ 390:	80 93 66 02 	sts	0x0266, r24
+		buf_reset();
+		buf_append(ADDRESS);
+		buf_append(MC_READ);
+		unsigned char bytesize = mbAmountL * 2;
+		buf_append(bytesize & 0xFF);
+		for(unsigned int port=mbRegisterL; port < mbRegisterL+mbAmountL; port++)
+ 394:	20 93 67 02 	sts	0x0267, r18
+ 398:	80 91 a9 02 	lds	r24, 0x02A9
+ 39c:	90 e0       	ldi	r25, 0x00	; 0
+ 39e:	88 0f       	add	r24, r24
+ 3a0:	99 1f       	adc	r25, r25
+ 3a2:	80 93 68 02 	sts	0x0268, r24
+ 3a6:	20 93 63 02 	sts	0x0263, r18
+ 3aa:	80 91 ad 02 	lds	r24, 0x02AD
+ 3ae:	c8 2f       	mov	r28, r24
+ 3b0:	d0 e0       	ldi	r29, 0x00	; 0
+ 3b2:	1a c0       	rjmp	.+52     	; 0x3e8 <uart_process_input+0x66>
+		{
+			unsigned int value = modbus_read_holding(port);
+ 3b4:	ce 01       	movw	r24, r28
+ 3b6:	0e 94 25 03 	call	0x64a	; 0x64a <modbus_read_holding>
+ 3ba:	28 2f       	mov	r18, r24
+			if (mbhStatus == MODBUS_HANDLE_ERR) return;
+ 3bc:	80 91 9c 02 	lds	r24, 0x029C
+ 3c0:	81 30       	cpi	r24, 0x01	; 1
+ 3c2:	09 f4       	brne	.+2      	; 0x3c6 <uart_process_input+0x44>
+ 3c4:	72 c0       	rjmp	.+228    	; 0x4aa <__stack+0x4b>
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 3c6:	80 91 63 02 	lds	r24, 0x0263
+ 3ca:	e8 2f       	mov	r30, r24
+ 3cc:	f0 e0       	ldi	r31, 0x00	; 0
+ 3ce:	ea 59       	subi	r30, 0x9A	; 154
+ 3d0:	fd 4f       	sbci	r31, 0xFD	; 253
+ 3d2:	90 83       	st	Z, r25
+ 3d4:	8f 5f       	subi	r24, 0xFF	; 255
+		buf_reset();
+		buf_append(ADDRESS);
+		buf_append(MC_READ);
+		unsigned char bytesize = mbAmountL * 2;
+		buf_append(bytesize & 0xFF);
+		for(unsigned int port=mbRegisterL; port < mbRegisterL+mbAmountL; port++)
+ 3d6:	e8 2f       	mov	r30, r24
+ 3d8:	f0 e0       	ldi	r31, 0x00	; 0
+ 3da:	ea 59       	subi	r30, 0x9A	; 154
+ 3dc:	fd 4f       	sbci	r31, 0xFD	; 253
+ 3de:	20 83       	st	Z, r18
+ 3e0:	8f 5f       	subi	r24, 0xFF	; 255
+ 3e2:	80 93 63 02 	sts	0x0263, r24
+ 3e6:	21 96       	adiw	r28, 0x01	; 1
+ 3e8:	20 91 a9 02 	lds	r18, 0x02A9
+ 3ec:	80 91 ad 02 	lds	r24, 0x02AD
+ 3f0:	90 e0       	ldi	r25, 0x00	; 0
+ 3f2:	82 0f       	add	r24, r18
+ 3f4:	91 1d       	adc	r25, r1
+ 3f6:	c8 17       	cp	r28, r24
+ 3f8:	d9 07       	cpc	r29, r25
+ 3fa:	e0 f2       	brcs	.-72     	; 0x3b4 <uart_process_input+0x32>
+ 3fc:	2b c0       	rjmp	.+86     	; 0x454 <uart_process_input+0xd2>
+			if (mbhStatus == MODBUS_HANDLE_ERR) return;
+			buf_append((unsigned char)(value >> 8));
+			buf_append((unsigned char)(value & 0xFF));
+		}
+	} else
+	if (mbCommand == MC_WRITE)
+ 3fe:	26 30       	cpi	r18, 0x06	; 6
+ 400:	49 f5       	brne	.+82     	; 0x454 <uart_process_input+0xd2>
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 402:	8a e0       	ldi	r24, 0x0A	; 10
+ 404:	80 93 66 02 	sts	0x0266, r24
+	{
+		buf_reset();
+		buf_append(ADDRESS);
+		buf_append(MC_WRITE);
+		buf_append(0);
+		buf_append(mbRegisterL);
+ 408:	20 93 67 02 	sts	0x0267, r18
+ 40c:	10 92 68 02 	sts	0x0268, r1
+ 410:	80 91 ad 02 	lds	r24, 0x02AD
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 414:	80 93 69 02 	sts	0x0269, r24
+ 418:	94 e0       	ldi	r25, 0x04	; 4
+ 41a:	90 93 63 02 	sts	0x0263, r25
+		buf_reset();
+		buf_append(ADDRESS);
+		buf_append(MC_WRITE);
+		buf_append(0);
+		buf_append(mbRegisterL);
+		unsigned int value = modbus_write_holding(mbRegisterL, mbValueL);
+ 41e:	60 91 ac 02 	lds	r22, 0x02AC
+ 422:	90 e0       	ldi	r25, 0x00	; 0
+ 424:	70 e0       	ldi	r23, 0x00	; 0
+ 426:	0e 94 4f 03 	call	0x69e	; 0x69e <modbus_write_holding>
+ 42a:	28 2f       	mov	r18, r24
+		if (mbhStatus == MODBUS_HANDLE_ERR) return;
+ 42c:	80 91 9c 02 	lds	r24, 0x029C
+ 430:	81 30       	cpi	r24, 0x01	; 1
+ 432:	d9 f1       	breq	.+118    	; 0x4aa <__stack+0x4b>
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 434:	80 91 63 02 	lds	r24, 0x0263
+ 438:	e8 2f       	mov	r30, r24
+ 43a:	f0 e0       	ldi	r31, 0x00	; 0
+ 43c:	ea 59       	subi	r30, 0x9A	; 154
+ 43e:	fd 4f       	sbci	r31, 0xFD	; 253
+ 440:	90 83       	st	Z, r25
+ 442:	8f 5f       	subi	r24, 0xFF	; 255
+		unsigned int value = modbus_write_holding(mbRegisterL, mbValueL);
+		if (mbhStatus == MODBUS_HANDLE_ERR) return;
+		buf_append((unsigned char)(value >> 8));
+		buf_append((unsigned char)(value & 0xFF));
+	}
+	crc_calculate();
+ 444:	e8 2f       	mov	r30, r24
+ 446:	f0 e0       	ldi	r31, 0x00	; 0
+ 448:	ea 59       	subi	r30, 0x9A	; 154
+ 44a:	fd 4f       	sbci	r31, 0xFD	; 253
+ 44c:	20 83       	st	Z, r18
+ 44e:	8f 5f       	subi	r24, 0xFF	; 255
+ 450:	80 93 63 02 	sts	0x0263, r24
+ 454:	0e 94 75 03 	call	0x6ea	; 0x6ea <crc_calculate>
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 458:	20 91 63 02 	lds	r18, 0x0263
+ 45c:	e2 2f       	mov	r30, r18
+ 45e:	f0 e0       	ldi	r31, 0x00	; 0
+ 460:	ea 59       	subi	r30, 0x9A	; 154
+ 462:	fd 4f       	sbci	r31, 0xFD	; 253
+ 464:	80 91 99 02 	lds	r24, 0x0299
+ 468:	80 83       	st	Z, r24
+ 46a:	2f 5f       	subi	r18, 0xFF	; 255
+		buf_append((unsigned char)(value & 0xFF));
+	}
+	crc_calculate();
+	buf_append(mbCRCH);
+	buf_append(mbCRCL);
+	buffer_pointer = 0;
+ 46c:	e2 2f       	mov	r30, r18
+ 46e:	f0 e0       	ldi	r31, 0x00	; 0
+ 470:	ea 59       	subi	r30, 0x9A	; 154
+ 472:	fd 4f       	sbci	r31, 0xFD	; 253
+ 474:	80 91 62 02 	lds	r24, 0x0262
+ 478:	80 83       	st	Z, r24
+ 47a:	2f 5f       	subi	r18, 0xFF	; 255
+ 47c:	20 93 63 02 	sts	0x0263, r18
+ 480:	10 92 ab 02 	sts	0x02AB, r1
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+
+void uart_switch_receive() { PORTD &= ~16; bStatus = UART_RECEIVING; }
+inline void uart_switch_transmit() { PORTD |= 16; bStatus = UART_TRANSMITTING; iTransmissionTimer = iTimer; }
+ 484:	94 9a       	sbi	0x12, 4	; 18
+ 486:	10 92 65 02 	sts	0x0265, r1
+ 48a:	80 91 9e 02 	lds	r24, 0x029E
+ 48e:	90 91 9f 02 	lds	r25, 0x029F
+ 492:	90 93 9b 02 	sts	0x029B, r25
+ 496:	80 93 9a 02 	sts	0x029A, r24
+
+unsigned char uart_send()
+{
+	if (buffer_pointer == buffer_length) return 0;
+ 49a:	22 23       	and	r18, r18
+ 49c:	31 f0       	breq	.+12     	; 0x4aa <__stack+0x4b>
+	UDR = buffer[buffer_pointer];
+ 49e:	80 91 66 02 	lds	r24, 0x0266
+ 4a2:	8c b9       	out	0x0c, r24	; 12
+	buffer_pointer++;
+ 4a4:	81 e0       	ldi	r24, 0x01	; 1
+ 4a6:	80 93 ab 02 	sts	0x02AB, r24
+	buf_append(mbCRCH);
+	buf_append(mbCRCL);
+	buffer_pointer = 0;
+	uart_switch_transmit();
+	uart_send();		
+}
+ 4aa:	df 91       	pop	r29
+ 4ac:	cf 91       	pop	r28
+ 4ae:	08 95       	ret
+
+000004b0 <analyze>:
+
+void analyze(unsigned char data)
+{
+ 4b0:	38 2f       	mov	r19, r24
+		case (SS_CRC_H):
+			if (data == mbCRCH)
+				bScanStatus = SS_CRC_L;
+			else reanalyze(data); break;
+		case (SS_CRC_L):
+			if (data == mbCRCL)
+ 4b2:	90 91 62 02 	lds	r25, 0x0262
+				crc_calculate();
+				bScanStatus = SS_CRC_H;
+			}
+			else reanalyze(data); break;
+		case (SS_CRC_H):
+			if (data == mbCRCH)
+ 4b6:	80 91 99 02 	lds	r24, 0x0299
+		case (SS_AMOUNT_H_R):
+			if (data == 0)
+				bScanStatus = SS_AMOUNT_L_R;
+			else reanalyze(data); break;
+		case (SS_AMOUNT_L_R):			// this step must calculate CRC
+			if ((data <= MAXREGISTER + 1 - mbRegisterL) && (data > 0))
+ 4ba:	60 91 ad 02 	lds	r22, 0x02AD
+ 4be:	44 e0       	ldi	r20, 0x04	; 4
+ 4c0:	50 e0       	ldi	r21, 0x00	; 0
+ 4c2:	46 1b       	sub	r20, r22
+ 4c4:	51 09       	sbc	r21, r1
+ 4c6:	20 91 a8 02 	lds	r18, 0x02A8
+	uart_send();		
+}
+
+void analyze(unsigned char data)
+{
+	switch (bScanStatus)
+ 4ca:	25 30       	cpi	r18, 0x05	; 5
+ 4cc:	19 f4       	brne	.+6      	; 0x4d4 <analyze+0x24>
+ 4ce:	45 c0       	rjmp	.+138    	; 0x55a <analyze+0xaa>
+		case (SS_AMOUNT_H_R):
+			if (data == 0)
+				bScanStatus = SS_AMOUNT_L_R;
+			else reanalyze(data); break;
+		case (SS_AMOUNT_L_R):			// this step must calculate CRC
+			if ((data <= MAXREGISTER + 1 - mbRegisterL) && (data > 0))
+ 4d0:	21 e0       	ldi	r18, 0x01	; 1
+ 4d2:	22 c0       	rjmp	.+68     	; 0x518 <analyze+0x68>
+	uart_send();		
+}
+
+void analyze(unsigned char data)
+{
+	switch (bScanStatus)
+ 4d4:	26 30       	cpi	r18, 0x06	; 6
+ 4d6:	70 f4       	brcc	.+28     	; 0x4f4 <analyze+0x44>
+ 4d8:	22 30       	cpi	r18, 0x02	; 2
+ 4da:	29 f1       	breq	.+74     	; 0x526 <analyze+0x76>
+ 4dc:	23 30       	cpi	r18, 0x03	; 3
+ 4de:	20 f4       	brcc	.+8      	; 0x4e8 <analyze+0x38>
+ 4e0:	21 30       	cpi	r18, 0x01	; 1
+ 4e2:	09 f0       	breq	.+2      	; 0x4e6 <analyze+0x36>
+ 4e4:	8a c0       	rjmp	.+276    	; 0x5fa <analyze+0x14a>
+ 4e6:	18 c0       	rjmp	.+48     	; 0x518 <analyze+0x68>
+ 4e8:	23 30       	cpi	r18, 0x03	; 3
+ 4ea:	39 f1       	breq	.+78     	; 0x53a <analyze+0x8a>
+ 4ec:	24 30       	cpi	r18, 0x04	; 4
+ 4ee:	09 f0       	breq	.+2      	; 0x4f2 <analyze+0x42>
+ 4f0:	84 c0       	rjmp	.+264    	; 0x5fa <analyze+0x14a>
+ 4f2:	27 c0       	rjmp	.+78     	; 0x542 <analyze+0x92>
+ 4f4:	28 30       	cpi	r18, 0x08	; 8
+ 4f6:	09 f4       	brne	.+2      	; 0x4fa <analyze+0x4a>
+ 4f8:	4e c0       	rjmp	.+156    	; 0x596 <analyze+0xe6>
+ 4fa:	29 30       	cpi	r18, 0x09	; 9
+ 4fc:	30 f4       	brcc	.+12     	; 0x50a <analyze+0x5a>
+ 4fe:	26 30       	cpi	r18, 0x06	; 6
+ 500:	89 f1       	breq	.+98     	; 0x564 <analyze+0xb4>
+ 502:	27 30       	cpi	r18, 0x07	; 7
+ 504:	09 f0       	breq	.+2      	; 0x508 <analyze+0x58>
+ 506:	79 c0       	rjmp	.+242    	; 0x5fa <analyze+0x14a>
+ 508:	41 c0       	rjmp	.+130    	; 0x58c <analyze+0xdc>
+ 50a:	29 30       	cpi	r18, 0x09	; 9
+ 50c:	09 f4       	brne	.+2      	; 0x510 <analyze+0x60>
+ 50e:	65 c0       	rjmp	.+202    	; 0x5da <analyze+0x12a>
+ 510:	2a 30       	cpi	r18, 0x0A	; 10
+ 512:	09 f0       	breq	.+2      	; 0x516 <analyze+0x66>
+ 514:	72 c0       	rjmp	.+228    	; 0x5fa <analyze+0x14a>
+ 516:	66 c0       	rjmp	.+204    	; 0x5e4 <analyze+0x134>
+ 518:	20 93 a8 02 	sts	0x02A8, r18
+	{
+		case (SS_ADDRESS):
+			if (data == ADDRESS) bScanStatus = SS_COMMAND;
+ 51c:	3a 30       	cpi	r19, 0x0A	; 10
+ 51e:	09 f0       	breq	.+2      	; 0x522 <analyze+0x72>
+ 520:	6e c0       	rjmp	.+220    	; 0x5fe <analyze+0x14e>
+ 522:	82 e0       	ldi	r24, 0x02	; 2
+ 524:	67 c0       	rjmp	.+206    	; 0x5f4 <analyze+0x144>
+									break;
+		case (SS_COMMAND):
+			if ((data == MC_WRITE) || (data == MC_READ))
+ 526:	36 30       	cpi	r19, 0x06	; 6
+ 528:	11 f0       	breq	.+4      	; 0x52e <analyze+0x7e>
+ 52a:	33 30       	cpi	r19, 0x03	; 3
+ 52c:	89 f6       	brne	.-94     	; 0x4d0 <analyze+0x20>
+			{
+				bScanStatus = SS_REGISTER_H_RW;
+ 52e:	83 e0       	ldi	r24, 0x03	; 3
+ 530:	80 93 a8 02 	sts	0x02A8, r24
+				mbCommand = data;
+ 534:	30 93 aa 02 	sts	0x02AA, r19
+ 538:	08 95       	ret
+			} else reanalyze(data);	break;
+		case (SS_REGISTER_H_RW):
+			if (data == 0)
+ 53a:	33 23       	and	r19, r19
+ 53c:	49 f6       	brne	.-110    	; 0x4d0 <analyze+0x20>
+				bScanStatus = SS_REGISTER_L_RW;	
+ 53e:	84 e0       	ldi	r24, 0x04	; 4
+ 540:	59 c0       	rjmp	.+178    	; 0x5f4 <analyze+0x144>
+			else reanalyze(data); break;
+		case (SS_REGISTER_L_RW):
+			if (data <= MAXREGISTER)
+ 542:	34 30       	cpi	r19, 0x04	; 4
+ 544:	28 f6       	brcc	.-118    	; 0x4d0 <analyze+0x20>
+			{
+				mbRegisterL = data;
+ 546:	30 93 ad 02 	sts	0x02AD, r19
+				bScanStatus = ((mbCommand == MC_WRITE) ? SS_VALUE_H_W : SS_AMOUNT_H_R);
+ 54a:	80 91 aa 02 	lds	r24, 0x02AA
+ 54e:	86 30       	cpi	r24, 0x06	; 6
+ 550:	11 f0       	breq	.+4      	; 0x556 <analyze+0xa6>
+ 552:	87 e0       	ldi	r24, 0x07	; 7
+ 554:	4f c0       	rjmp	.+158    	; 0x5f4 <analyze+0x144>
+ 556:	85 e0       	ldi	r24, 0x05	; 5
+ 558:	4d c0       	rjmp	.+154    	; 0x5f4 <analyze+0x144>
+			}
+			else reanalyze(data); break;
+		case (SS_VALUE_H_W):
+			if (data == 0) 
+ 55a:	33 23       	and	r19, r19
+ 55c:	09 f0       	breq	.+2      	; 0x560 <analyze+0xb0>
+ 55e:	b8 cf       	rjmp	.-144    	; 0x4d0 <analyze+0x20>
+				bScanStatus = SS_VALUE_L_W;
+ 560:	86 e0       	ldi	r24, 0x06	; 6
+ 562:	48 c0       	rjmp	.+144    	; 0x5f4 <analyze+0x144>
+ 564:	20 93 a8 02 	sts	0x02A8, r18
+			else reanalyze(data); break;
+		case (SS_VALUE_L_W):			// this step must calculate CRC
+			mbValueL = data;
+ 568:	30 93 ac 02 	sts	0x02AC, r19
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 56c:	8a e0       	ldi	r24, 0x0A	; 10
+ 56e:	80 93 66 02 	sts	0x0266, r24
+			buf_append(mbValueL);
+			crc_calculate();
+			bScanStatus = SS_CRC_H;
+								  break;
+		case (SS_AMOUNT_H_R):
+			if (data == 0)
+ 572:	20 93 67 02 	sts	0x0267, r18
+ 576:	10 92 68 02 	sts	0x0268, r1
+ 57a:	60 93 69 02 	sts	0x0269, r22
+ 57e:	10 92 6a 02 	sts	0x026A, r1
+ 582:	30 93 6b 02 	sts	0x026B, r19
+ 586:	20 93 63 02 	sts	0x0263, r18
+ 58a:	23 c0       	rjmp	.+70     	; 0x5d2 <analyze+0x122>
+ 58c:	33 23       	and	r19, r19
+ 58e:	09 f0       	breq	.+2      	; 0x592 <analyze+0xe2>
+ 590:	9f cf       	rjmp	.-194    	; 0x4d0 <analyze+0x20>
+				bScanStatus = SS_AMOUNT_L_R;
+ 592:	88 e0       	ldi	r24, 0x08	; 8
+ 594:	2f c0       	rjmp	.+94     	; 0x5f4 <analyze+0x144>
+			else reanalyze(data); break;
+		case (SS_AMOUNT_L_R):			// this step must calculate CRC
+			if ((data <= MAXREGISTER + 1 - mbRegisterL) && (data > 0))
+ 596:	83 2f       	mov	r24, r19
+ 598:	90 e0       	ldi	r25, 0x00	; 0
+ 59a:	48 17       	cp	r20, r24
+ 59c:	59 07       	cpc	r21, r25
+ 59e:	0c f4       	brge	.+2      	; 0x5a2 <analyze+0xf2>
+ 5a0:	97 cf       	rjmp	.-210    	; 0x4d0 <analyze+0x20>
+ 5a2:	33 23       	and	r19, r19
+ 5a4:	09 f4       	brne	.+2      	; 0x5a8 <analyze+0xf8>
+ 5a6:	94 cf       	rjmp	.-216    	; 0x4d0 <analyze+0x20>
+ 5a8:	20 93 a8 02 	sts	0x02A8, r18
+			{
+				mbAmountL = data;
+ 5ac:	30 93 a9 02 	sts	0x02A9, r19
+unsigned char buffer[50];
+unsigned char buffer_length;
+unsigned char buffer_pointer;
+
+inline void buf_reset() { buffer_length = 0; }
+inline void buf_append(unsigned char value) { buffer[buffer_length] = value; buffer_length++; }
+ 5b0:	8a e0       	ldi	r24, 0x0A	; 10
+ 5b2:	80 93 66 02 	sts	0x0266, r24
+				buf_append(MC_READ);
+				buf_append(0);
+				buf_append(mbRegisterL);
+				buf_append(0);
+				buf_append(mbAmountL);
+				crc_calculate();
+ 5b6:	83 e0       	ldi	r24, 0x03	; 3
+ 5b8:	80 93 67 02 	sts	0x0267, r24
+ 5bc:	10 92 68 02 	sts	0x0268, r1
+ 5c0:	60 93 69 02 	sts	0x0269, r22
+ 5c4:	10 92 6a 02 	sts	0x026A, r1
+ 5c8:	30 93 6b 02 	sts	0x026B, r19
+ 5cc:	86 e0       	ldi	r24, 0x06	; 6
+ 5ce:	80 93 63 02 	sts	0x0263, r24
+ 5d2:	0e 94 75 03 	call	0x6ea	; 0x6ea <crc_calculate>
+				bScanStatus = SS_CRC_H;
+ 5d6:	89 e0       	ldi	r24, 0x09	; 9
+ 5d8:	0d c0       	rjmp	.+26     	; 0x5f4 <analyze+0x144>
+			}
+			else reanalyze(data); break;
+		case (SS_CRC_H):
+			if (data == mbCRCH)
+ 5da:	38 17       	cp	r19, r24
+ 5dc:	09 f0       	breq	.+2      	; 0x5e0 <analyze+0x130>
+ 5de:	78 cf       	rjmp	.-272    	; 0x4d0 <analyze+0x20>
+				bScanStatus = SS_CRC_L;
+ 5e0:	8a e0       	ldi	r24, 0x0A	; 10
+ 5e2:	08 c0       	rjmp	.+16     	; 0x5f4 <analyze+0x144>
+			else reanalyze(data); break;
+		case (SS_CRC_L):
+			if (data == mbCRCL)
+ 5e4:	39 17       	cp	r19, r25
+ 5e6:	09 f0       	breq	.+2      	; 0x5ea <analyze+0x13a>
+ 5e8:	73 cf       	rjmp	.-282    	; 0x4d0 <analyze+0x20>
+ 5ea:	20 93 a8 02 	sts	0x02A8, r18
+			{
+				uart_process_input();
+ 5ee:	0e 94 c1 01 	call	0x382	; 0x382 <uart_process_input>
+				bScanStatus = SS_ADDRESS;
+ 5f2:	81 e0       	ldi	r24, 0x01	; 1
+ 5f4:	80 93 a8 02 	sts	0x02A8, r24
+ 5f8:	08 95       	ret
+ 5fa:	20 93 a8 02 	sts	0x02A8, r18
+ 5fe:	08 95       	ret
+
+00000600 <__vector_11>:
+	}
+	
+}
+
+SIGNAL (SIG_USART_RECV)
+{
+ 600:	1f 92       	push	r1
+ 602:	0f 92       	push	r0
+ 604:	0f b6       	in	r0, 0x3f	; 63
+ 606:	0f 92       	push	r0
+ 608:	11 24       	eor	r1, r1
+ 60a:	2f 93       	push	r18
+ 60c:	3f 93       	push	r19
+ 60e:	4f 93       	push	r20
+ 610:	5f 93       	push	r21
+ 612:	6f 93       	push	r22
+ 614:	7f 93       	push	r23
+ 616:	8f 93       	push	r24
+ 618:	9f 93       	push	r25
+ 61a:	af 93       	push	r26
+ 61c:	bf 93       	push	r27
+ 61e:	ef 93       	push	r30
+ 620:	ff 93       	push	r31
+	unsigned char data = UDR;
+ 622:	8c b1       	in	r24, 0x0c	; 12
+	analyze(data);
+ 624:	0e 94 58 02 	call	0x4b0	; 0x4b0 <analyze>
+}
+ 628:	ff 91       	pop	r31
+ 62a:	ef 91       	pop	r30
+ 62c:	bf 91       	pop	r27
+ 62e:	af 91       	pop	r26
+ 630:	9f 91       	pop	r25
+ 632:	8f 91       	pop	r24
+ 634:	7f 91       	pop	r23
+ 636:	6f 91       	pop	r22
+ 638:	5f 91       	pop	r21
+ 63a:	4f 91       	pop	r20
+ 63c:	3f 91       	pop	r19
+ 63e:	2f 91       	pop	r18
+ 640:	0f 90       	pop	r0
+ 642:	0f be       	out	0x3f, r0	; 63
+ 644:	0f 90       	pop	r0
+ 646:	1f 90       	pop	r1
+ 648:	18 95       	reti
+
+0000064a <modbus_read_holding>:
+#include "Alarm.h"
+#include "uart.h"
+
+unsigned int modbus_read_holding(unsigned int port)
+{
+	mbhStatus = MODBUS_HANDLE_OK;
+ 64a:	10 92 9c 02 	sts	0x029C, r1
+	switch (port)
+ 64e:	81 30       	cpi	r24, 0x01	; 1
+ 650:	91 05       	cpc	r25, r1
+ 652:	99 f0       	breq	.+38     	; 0x67a <modbus_read_holding+0x30>
+ 654:	81 30       	cpi	r24, 0x01	; 1
+ 656:	91 05       	cpc	r25, r1
+ 658:	30 f0       	brcs	.+12     	; 0x666 <modbus_read_holding+0x1c>
+ 65a:	82 30       	cpi	r24, 0x02	; 2
+ 65c:	91 05       	cpc	r25, r1
+ 65e:	81 f0       	breq	.+32     	; 0x680 <modbus_read_holding+0x36>
+ 660:	03 97       	sbiw	r24, 0x03	; 3
+ 662:	b1 f4       	brne	.+44     	; 0x690 <modbus_read_holding+0x46>
+ 664:	12 c0       	rjmp	.+36     	; 0x68a <modbus_read_holding+0x40>
+	{
+		case 0x0000:
+			return (bAlarmEnabled << 8) + bPresenceSuspend;
+ 666:	90 91 9d 02 	lds	r25, 0x029D
+ 66a:	80 e0       	ldi	r24, 0x00	; 0
+ 66c:	20 91 61 02 	lds	r18, 0x0261
+ 670:	ac 01       	movw	r20, r24
+ 672:	42 0f       	add	r20, r18
+ 674:	51 1d       	adc	r21, r1
+ 676:	9a 01       	movw	r18, r20
+ 678:	10 c0       	rjmp	.+32     	; 0x69a <modbus_read_holding+0x50>
+		case 0x0001:
+			return bAlarmMask;
+ 67a:	80 91 64 02 	lds	r24, 0x0264
+ 67e:	02 c0       	rjmp	.+4      	; 0x684 <modbus_read_holding+0x3a>
+		case 0x0002:
+			return bSiren;
+ 680:	80 91 98 02 	lds	r24, 0x0298
+ 684:	28 2f       	mov	r18, r24
+ 686:	30 e0       	ldi	r19, 0x00	; 0
+ 688:	08 c0       	rjmp	.+16     	; 0x69a <modbus_read_holding+0x50>
+		case 0x0003:
+			return bDebugStatus;
+ 68a:	80 91 60 02 	lds	r24, 0x0260
+ 68e:	fa cf       	rjmp	.-12     	; 0x684 <modbus_read_holding+0x3a>
+		default:
+			mbhStatus = MODBUS_HANDLE_ERR;
+ 690:	81 e0       	ldi	r24, 0x01	; 1
+ 692:	80 93 9c 02 	sts	0x029C, r24
+ 696:	20 e0       	ldi	r18, 0x00	; 0
+ 698:	30 e0       	ldi	r19, 0x00	; 0
+	}	
+	return 0;
+}
+ 69a:	c9 01       	movw	r24, r18
+ 69c:	08 95       	ret
+
+0000069e <modbus_write_holding>:
+unsigned int modbus_write_holding(unsigned int port, unsigned int value)
+{
+	mbhStatus = MODBUS_HANDLE_OK;
+ 69e:	10 92 9c 02 	sts	0x029C, r1
+	switch (port)
+ 6a2:	81 30       	cpi	r24, 0x01	; 1
+ 6a4:	91 05       	cpc	r25, r1
+ 6a6:	61 f0       	breq	.+24     	; 0x6c0 <modbus_write_holding+0x22>
+ 6a8:	81 30       	cpi	r24, 0x01	; 1
+ 6aa:	91 05       	cpc	r25, r1
+ 6ac:	30 f0       	brcs	.+12     	; 0x6ba <modbus_write_holding+0x1c>
+ 6ae:	82 30       	cpi	r24, 0x02	; 2
+ 6b0:	91 05       	cpc	r25, r1
+ 6b2:	71 f0       	breq	.+28     	; 0x6d0 <modbus_write_holding+0x32>
+ 6b4:	03 97       	sbiw	r24, 0x03	; 3
+ 6b6:	91 f4       	brne	.+36     	; 0x6dc <modbus_write_holding+0x3e>
+ 6b8:	0e c0       	rjmp	.+28     	; 0x6d6 <modbus_write_holding+0x38>
+	{
+		case 0x0000:
+			bPresenceSuspend = (unsigned char)(value & 0xFF);
+ 6ba:	60 93 61 02 	sts	0x0261, r22
+ 6be:	06 c0       	rjmp	.+12     	; 0x6cc <modbus_write_holding+0x2e>
+			return bPresenceSuspend;
+		case 0x0001:
+			rearm((unsigned char)(value & 0xFF));
+ 6c0:	86 2f       	mov	r24, r22
+ 6c2:	0e 94 49 00 	call	0x92	; 0x92 <rearm>
+			return bAlarmMask;
+ 6c6:	80 91 64 02 	lds	r24, 0x0264
+ 6ca:	68 2f       	mov	r22, r24
+ 6cc:	70 e0       	ldi	r23, 0x00	; 0
+ 6ce:	0b c0       	rjmp	.+22     	; 0x6e6 <modbus_write_holding+0x48>
+		case 0x0002:
+			bSiren = (unsigned char)(value & 0xFF);
+ 6d0:	60 93 98 02 	sts	0x0298, r22
+ 6d4:	fb cf       	rjmp	.-10     	; 0x6cc <modbus_write_holding+0x2e>
+			return bSiren;
+		case 0x0003:
+			bDebugStatus = (unsigned char)(value & 0xFF);
+ 6d6:	60 93 60 02 	sts	0x0260, r22
+ 6da:	f8 cf       	rjmp	.-16     	; 0x6cc <modbus_write_holding+0x2e>
+			return bDebugStatus;
+		default:
+			mbhStatus = MODBUS_HANDLE_ERR;
+ 6dc:	81 e0       	ldi	r24, 0x01	; 1
+ 6de:	80 93 9c 02 	sts	0x029C, r24
+ 6e2:	60 e0       	ldi	r22, 0x00	; 0
+ 6e4:	70 e0       	ldi	r23, 0x00	; 0
+	}
+	return 0;
+}
+ 6e6:	cb 01       	movw	r24, r22
+ 6e8:	08 95       	ret
+
+000006ea <crc_calculate>:
+
+void crc_calculate()
+{
+	mbCRCH = 0xFF;
+	mbCRCL = 0xFF;
+	for(unsigned char i = 0; i < buffer_length; i++)
+ 6ea:	80 91 63 02 	lds	r24, 0x0263
+ 6ee:	a6 e6       	ldi	r26, 0x66	; 102
+ 6f0:	b2 e0       	ldi	r27, 0x02	; 2
+ 6f2:	4f ef       	ldi	r20, 0xFF	; 255
+ 6f4:	9f ef       	ldi	r25, 0xFF	; 255
+ 6f6:	28 2f       	mov	r18, r24
+ 6f8:	30 e0       	ldi	r19, 0x00	; 0
+ 6fa:	2a 0f       	add	r18, r26
+ 6fc:	3b 1f       	adc	r19, r27
+ 6fe:	0b c0       	rjmp	.+22     	; 0x716 <crc_calculate+0x2c>
+	{
+		unsigned char value = buffer[i];
+		unsigned int factor = CRC_LOOKUP_TABLE[value ^ mbCRCL];
+ 700:	8d 91       	ld	r24, X+
+ 702:	98 27       	eor	r25, r24
+ 704:	e9 2f       	mov	r30, r25
+ 706:	f0 e0       	ldi	r31, 0x00	; 0
+ 708:	ee 0f       	add	r30, r30
+ 70a:	ff 1f       	adc	r31, r31
+ 70c:	e0 5a       	subi	r30, 0xA0	; 160
+ 70e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 710:	90 81       	ld	r25, Z
+
+		mbCRCL = mbCRCH ^ (unsigned char)(factor & 0xFF);
+ 712:	94 27       	eor	r25, r20
+		mbCRCH = (unsigned char)(factor >> 8);
+ 714:	41 81       	ldd	r20, Z+1	; 0x01
+
+void crc_calculate()
+{
+	mbCRCH = 0xFF;
+	mbCRCL = 0xFF;
+	for(unsigned char i = 0; i < buffer_length; i++)
+ 716:	a2 17       	cp	r26, r18
+ 718:	b3 07       	cpc	r27, r19
+ 71a:	91 f7       	brne	.-28     	; 0x700 <crc_calculate+0x16>
+		mbCRCL = mbCRCH ^ (unsigned char)(factor & 0xFF);
+		mbCRCH = (unsigned char)(factor >> 8);
+	}	
+
+	unsigned char temp = mbCRCH;
+	mbCRCH = mbCRCL;
+ 71c:	90 93 99 02 	sts	0x0299, r25
+	mbCRCL = temp;
+ 720:	40 93 62 02 	sts	0x0262, r20
+}
+ 724:	08 95       	ret
+
+00000726 <_exit>:
+ 726:	f8 94       	cli
+
+00000728 <__stop_program>:
+ 728:	ff cf       	rjmp	.-2      	; 0x728 <__stop_program>

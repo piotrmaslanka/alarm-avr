@@ -1,0 +1,1 @@
+void crc_calculate();
